@@ -2,7 +2,7 @@ jQuery(function() {
 
 function run() { //run, when input event happens
 	//1) read input
-	const input = frontend.getInput();
+	const input = getInput();
 
 	//2) do work -> get answer as json? [extra file]
 	const json = backend.checkAccount(input);
@@ -16,40 +16,37 @@ function run() { //run, when input event happens
 
 
 
-function frontend() {
-	function getInput() {
-		return escape(jQuery('#username').val());
+function getInput() {
+	return escape(jQuery('#username').val());
+};
+	
+
+//====HELPER=FUNCTIONS========
+
+function createList(json) {
+	const list = document.createElement('ul');
+
+	for(var acc in json) {
+		var listPoint = document.createElement('li');
+		listPoint.innerHTML = 'There is an <a href="' + json[acc].url + '">account</a> at ' + json[acc].name;
+		list.append(listPoint);
 	}
 
-	//====HELPER=FUNCTIONS========
-
-	function createList(json) {
-		const list = document.createElement('ul');
-
-		for(var acc in json) {
-			var listPoint = document.createElement('li');
-			listPoint.innerHTML = 'There is an <a href="' + json[acc].url + '">account</a> at ' + json[acc].name;
-			list.append(listPoint);
-		}
-
-		return list;
-	}
-
-
-	//====INPUT=EVENTS==============
-
-	//this function will be run when enter is pressed in the #username input
-	jQuery('#username').keypress(function (e) {
-		if (e.which == 13) {
-   			run();
-   		}
-	});
-
-	//this function will run when button #submit is clicked
-	jQuery('#submit').click(function() {
-		run();	
-	});
+	return list;
 }
 
+//====INPUT=EVENTS==============
+
+//this function will be run when enter is pressed in the #username input
+jQuery('#username').keypress(function (e) {
+	if (e.which == 13) {
+		run();
+	}
+});
+
+//this function will run when button #submit is clicked
+jQuery('#submit').click(function() {
+	run();	
+});
 
 });
