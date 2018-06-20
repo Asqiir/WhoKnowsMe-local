@@ -45,13 +45,18 @@ function PlainTextPortal(url,name,successCondition) {
 	this.successCondition = successCondition;
 }
 
+PlainTextPortal.prototype = Portal;
+
 PlainTextPortal.hasAccount = function() {
 	//if: title der website enthält this.successCondition -> return true
 }
 
-PlainTextPortal.prototype = Portal;
 
 
+function Account(url,name) {
+	this.profileUrl = url;
+	this.portalName = name;
+}
 
 
 function accountsAsJson(accounts) {

@@ -2,13 +2,13 @@ jQuery(function() {
 
 function run() { //run, when input event happens
 	//1) read input
-	const input = getInput();
+	const input = getInput(); //frontend
 
 	//2) do work -> get answer as json? [extra file]
-	const json = backend.checkAccount(input);
+	const json = checkAccount(input); //backend
 
 	//3) convert answer to list
-	const list = frontend.createList(json);
+	const list = createList(json); //frontend
 
 	//3) print output
 	jQuery('#output').html(list);
