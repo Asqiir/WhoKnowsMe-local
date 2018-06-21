@@ -1,19 +1,29 @@
 jQuery(function() {
 
+//global. when 0, nothing loads anymore
+let stillUnchecked = 0;
+
 function run() { //run, when input event happens
-	//1) read input
-	const input = getInput(); //frontend
+	//1) clear #output
+	jQuery('#output').html('');
 
-	//2) do work -> get answer as json? [extra file]
-	const json = checkAccount(input); //backend
+	//2) start loading animation
+	startLoading();
 
-	//3) convert answer to list
-	const list = createList(json); //frontend
+	//3) get username
+	const username = getInput();
 
-	//3) print output
-	jQuery('#output').html(list);
+	//4) load portals
+	const allPortals = loadPortals(username);
+
+	//5) check any portal
+	for(let index=0; index < allPortals.length; index++) {
+		const url = allPortals[index]['url'];
+		const on_finish = allPortals[index].accountCheck;
+
+		//TODO: make cors request here!
+	}
 }
-
 
 
 function getInput() {
@@ -21,19 +31,11 @@ function getInput() {
 };
 	
 
-//====HELPER=FUNCTIONS========
+//====LOADING=FUNCTIONS========
+function startLoading() {}
 
-function createList(json) {
-	const list = document.createElement('ul');
+function stopLoading() {}
 
-	for(var acc in json) {
-		var listPoint = document.createElement('li');
-		listPoint.innerHTML = 'There is an <a href="' + json[acc].url + '">account</a> at ' + json[acc].name;
-		list.append(listPoint);
-	}
-
-	return list;
-}
 
 //====INPUT=EVENTS==============
 
