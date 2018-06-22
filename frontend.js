@@ -1,5 +1,7 @@
 jQuery(function() {
 
+const proxy_url = "https://cors.io?";
+
 //global. when 0, nothing loads anymore
 let stillUnchecked = 0;
 
@@ -21,7 +23,7 @@ function run() { //run, when input event happens
 		const url = allPortals[index]['url'];
 		const on_finish = allPortals[index].accountCheck;
 
-		//TODO: make cors request here!
+		jQuery.get(proxy_url + url, on_finish);
 	}
 }
 

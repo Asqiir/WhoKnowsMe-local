@@ -5,7 +5,21 @@ function Portal(url, name) {
 	this.url = url;
 	this.name = name;
 
-	//every portal has the function check() -> true oder false, je nachdem, ob da ein account ist
+	//every portal has the function check(data) -> true oder false, je nachdem, ob da ein account ist
+}
+
+Portal.accountCheck = function(html) {
+	const doc = new DOMParser().parseFromString(html, "text/html");
+
+	if(this.check(doc)) {
+		printAccount(this.url, this.name);
+	}
+
+	stillUnchecked -= 1;
+
+	if(stillUnchecked <= 0) {
+		stopLoading();
+	}
 }
 
 
@@ -17,8 +31,10 @@ function PlainTextPortal(url, name, successCondition) {
 
 PlainTextPortal.prototype = Portal;
 
-PlainTextPortal.check = function() {
-	TODO
+PlainTextPortal.check = function(doc) {
+	const title = doc.querySelectorAll('title')[0].innerHTML;
+
+	return !title.includes(this.successCondition);
 }
 
 
