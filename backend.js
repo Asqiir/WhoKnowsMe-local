@@ -1,6 +1,3 @@
-jQuery(function() {
-
-
 class Portal {
 	constructor(url, name) {
 		this.url = url;
@@ -39,38 +36,4 @@ class PlainTextPortal extends Portal {
 	}
 }
 
-
-
-function loadPortals(username) {
-	//load from file -> single pattern
-	const loadPlainTextPortals = function(username) {
-		const file = "plaintextportals.json";
-		const placeHolder = "USER";
-		const json = jQuery.getJSON(file);
-
-		for(let index=0; index<json.length; index++) {
-			const generalUrl = json[index]['url'];
-			const portalName = json[index]['name'];
-			const successCondition = json[index]['successCondition'];
-
-			const specificUrl = generalUrl.replace(placeHolder,username);
-
-			portals.push(new PlainTextPortal(specificUrl, portalName, successCondition));
-		}
-	}
-
-	//main loading
-	var portals = [];
-
-	//load any
-	loadPlainTextPortals(username);
-
-	return portals;
-}
-
-
-});
-
-function test() {}
-test();
 

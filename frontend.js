@@ -16,7 +16,7 @@ function run() { //run, when input event happens
 	const username = getInput();
 
 	//4) load portals
-	const allPortals = loadPortals(username);
+	const allPortals = window.loadSpace.loadPortals(username);
 	stillUnchecked = allPortals.length;
 
 	//5) check any portal
