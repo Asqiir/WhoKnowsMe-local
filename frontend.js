@@ -17,6 +17,7 @@ function run() { //run, when input event happens
 
 	//4) load portals
 	const allPortals = loadPortals(username);
+	stillUnchecked = allPortals.length;
 
 	//5) check any portal
 	for(let index=0; index < allPortals.length; index++) {
@@ -34,9 +35,13 @@ function getInput() {
 	
 
 //====LOADING=FUNCTIONS========
-function startLoading() {}
+function startLoading() {
+	jQuery('#submit').addClass('loading');
+}
 
-function stopLoading() {}
+function stopLoading() {
+	jQuery('#submit').removeClass('loading');
+}
 
 
 //====INPUT=EVENTS==============
@@ -52,5 +57,9 @@ jQuery('#username').keypress(function (e) {
 jQuery('#submit').click(function() {
 	run();	
 });
+
+
+//======NO=JS=WARNING==========
+jQuery('#no-js-warning').remove();
 
 });
